@@ -4,6 +4,7 @@
     --text-secondary: #ececec;
     --bg-primary: #23232e;
     --bg-secondary: #141418;
+    --transition-speed: 600ms;
 }
 
 h1, h2, h3, h4, h5, h6, strong {
@@ -44,8 +45,6 @@ main {
 }
 
 .navbar {
-    width: 10rem;
-    height: 100vh;
     position: fixed;
     background-color: var(--bg-primary);
     transition: width 200ms ease; 
@@ -74,6 +73,14 @@ main {
     height: 5rem;
     color: var(--text-primary);
     text-decoration: none;
+    filter: grayscale(100%) opacity(0.7);
+    transition: var(--transition-speed)
+}
+
+.nav-link:hover {
+    filter: grayscale(0%) opacity(1);
+    background: var(--bg-secondary);
+    color: var(--text-secondary);
 }
 
 .link-text {
@@ -86,23 +93,67 @@ main {
     margin: 0 1.5rem;
 }
 
-.navbar:hover {
-    width: 16rem;
+.logo {
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    text-align: center;
+    color: var(--text-secondary);
+    background: var(--bg-secondary);
+    font-size: 1.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.3ch;
+    width: 100%;
 }
 
-.navbar:hover .link-text {
-    display: block;
+.logo {
+    transform: rotate(0deg);
+    transition: transform var(--transition-speed);
 }
 
-.fa-primary {
-    color: #ff7eee
+.navbar:hover .logo svg {
+    transform: rotate(-180deg);
 }
 
-.fa-secondary {
-    color: #df49a6
+/* Small screens */
+@media only screen and (max-width: 600px) {
+    .navbar {
+        bottom: 0;
+        width: 100vw;
+        height: 5rem;
+    }
+
+    .logo {
+        display: none;
+    }
+
+    .navbar-nav {
+        flex-direction: row;
+    }
+
+    .nav-link {
+        justify-content: center;
+    }
+
+    main {
+        margin: 0;
+    }
 }
 
-.fa-primary,
-.fa-secondary {
-    transition: var(--transition-speed);
+/* Large screens */
+@media only screen and (min-width: 600px) {
+    .navbar {
+        top: 0;
+        width: 5rem;
+        height: 100vh;
+    }
+
+    .navbar:hover {
+        width: 16rem;
+    }
+
+    .navbar:hover .link-text {
+        display: inline;
+        transition: opacity var(--transition-speed)
+    }
 }
